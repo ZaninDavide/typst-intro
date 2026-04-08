@@ -282,12 +282,12 @@ print(\"Hello\")
   ],
   [```
   $
-  A union B = emptyset => 
-  A backslash B = A
+  A inter B = emptyset => 
+  A without B = A
   $
   ```],
-  [$ A union B = emptyset => 
-  A backslash B = A $],
+  [$ A inter B = emptyset => 
+  A without B = A $],
   [```$ 
   Q = 2 pi
   "energy at the start" / 
@@ -302,12 +302,12 @@ print(\"Hello\")
   arrow(F) = m arrow(a)
   $],
   [```$
-  vec(3,8,15) = 
+  vec(3,9,15) = 
   mat(1,2,3; 4,5,6; 7,8,9) 
   vec(1,1,0)   
   $```],
   [$
-    vec(3,8,15) = mat(1,2,3; 4,5,6; 7,8,9) vec(1,1,0)   
+    vec(3,9,15) = mat(1,2,3; 4,5,6; 7,8,9) vec(1,1,0)   
   $],
   /* [```$ 
   W &= integral_gamma 
@@ -382,20 +382,20 @@ print(\"Hello\")
   #x \ #y
   ],
   [```
-  #link("example.com",[_Example_])
-  #link("example.com")[_Example_]
+  #let nice(it) = [✨] + it + [✨]
+  #nice([Typst]) \ #nice[Typst]
   ```],
   [
-  #link("example.com",[_Example_])
-  #link("example.com")[_Example_]
+  #let nice(it) = [✨] + it + [✨]
+  #nice([Typst]) \ #nice[Typst]
   ],
   [```
-  #let nice(it) = "✨" + it + "✨"
-  #nice("Typst")
+  #link("example.com",[_Example_])
+  #link("example.com")[_Example_]
   ```],
   [
-  #let nice(it) = "✨" + it + "✨"
-  #nice("Typst")
+  #link("example.com",[_Example_])
+  #link("example.com")[_Example_]
   ],
   [
     ```
@@ -486,7 +486,9 @@ figure(caption: [Math mode (https://typst.app/docs/reference/syntax/#math)], pla
   column-gutter: 10pt,
   align: (left, left),
 [```
-#set text(font: "New Computer Modern")
+#set text(
+  font: "New Computer Modern"
+)
 Hello Typst enthusiasts!
 ```],
 [
@@ -710,14 +712,14 @@ $ F = m a $
 ])
 
 #set page(columns: 2)
-#title-page[#box(text(size: 80pt)[📦], baseline: 10pt) Packages]
+#title-page[#box(text(size: 80pt)[🗃], baseline: 10pt) Packages]
 #set page(columns: 1)
 
 
-#import "@preview/physica:0.9.5": *
+#import "@preview/physica:0.9.8": *
 
 #v(10pt)
-#align(center, text(size: 25pt)[`#import "@preview/physica:0.9.5": *`])
+#align(center, text(size: 25pt)[`#import "@preview/physica:0.9.8": *`])
 #v(10pt)
 
 #grid(
@@ -754,18 +756,18 @@ $ tn(R, +mu, -nu) - 1/2 R tn(g, +mu, -nu) = 8 pi G tn(T, +mu, -nu) $
 
 #pagebreak()
 #v(10pt)
-#align(center, text(size: 25pt)[`#import "@preview/quill:0.6.1": *`])
+#align(center, text(size: 25pt)[`#import "@preview/quill:0.7.2": *`])
 #v(10pt)
 
-#import "@preview/quill:0.6.1": *
+#import "@preview/quill:0.7.2": *
 #grid(
   columns: 100%,
   inset: (bottom: 25pt),
   row-gutter: 25pt,
   align: center + horizon,
 [```
-#import "@preview/quill:0.6.1": *
-#import "@preview/physica:0.9.5": ket
+#import "@preview/quill:0.7.2": *
+#import "@preview/physica:0.9.8": ket
 
 #let super = $ (ket(00) + ket(11))/sqrt(2) $
 #quantum-circuit(
@@ -776,7 +778,7 @@ $ tn(R, +mu, -nu) - 1/2 R tn(g, +mu, -nu) = 8 pi G tn(T, +mu, -nu) $
 ,
 v(-40pt) +
 scale(200%, reflow: true)[
-#import "@preview/quill:0.6.1": *
+#import "@preview/quill:0.7.2": *
 #let super = $ (ket(00) + ket(11))/sqrt(2) $
 #quantum-circuit(
   lstick($ket(0)$), $H$, ctrl(1), rstick(super, n: 2), [\ ],
@@ -811,7 +813,7 @@ scale(200%, reflow: true)[
 
 #pagebreak()
 #v(10pt)
-#align(center, text(size: 25pt)[`#import "@preview/cetz:0.3.4"`])
+#align(center, text(size: 25pt)[`#import "@preview/cetz:0.4.2"`])
 #v(10pt)
 
 #v(1fr)
@@ -819,9 +821,9 @@ scale(200%, reflow: true)[
   columns: (50%, 50%),
   inset: (bottom: 25pt),
   row-gutter: 25pt,
-  align: left,
+  align: center + horizon,
   [```
-  #import "@preview/cetz:0.3.4"
+  #import "@preview/cetz:0.4.2"
   #cetz.canvas({
     import cetz.draw: *
     circle((0, 0))
@@ -829,7 +831,7 @@ scale(200%, reflow: true)[
   })
   ```],
   [
-      #import "@preview/cetz:0.3.4"
+      #import "@preview/cetz:0.4.2"
   #cetz.canvas({
     import cetz.draw: *
     circle((0, 0))
@@ -844,7 +846,7 @@ scale(200%, reflow: true)[
 
 #figure(caption: [_La Mona Lisa_ according to chatGPT
 ], [
-  #import "@preview/cetz:0.3.4" as cetz
+  #import "@preview/cetz:0.4.2" as cetz
   #cetz.canvas({
     import cetz.draw: *
     // Cornice
@@ -972,9 +974,9 @@ scale(200%, reflow: true)[
 
 #pagebreak()
 #v(10pt)
-#align(center, text(size: 25pt)[`#import "@preview/lilaq:0.2.0" as lq`])
+#align(center, text(size: 25pt)[`#import "@preview/lilaq:0.6.0" as lq`])
 #v(10pt)
-#import "@preview/lilaq:0.2.0" as lq
+#import "@preview/lilaq:0.6.0" as lq
 
 ```
 #let data = csv("example.csv").slice(1, none)
@@ -1033,10 +1035,165 @@ scale(200%, reflow: true)[
 #place(center + horizon, image("images/lilaq-example.png", height: 100%))
 
 #pagebreak()
+
 #v(10pt)
-#align(center, text(size: 25pt)[`#import "@preview/wicked:0.1.1": wick`])
+#align(center, text(size: 25pt)[`#import "@preview/patatrac:0.5.0"`])
 #v(10pt)
-#import "@preview/wicked:0.1.1": wick
+
+#v(1fr)
+#import "@preview/patatrac:0.5.0"
+#grid(
+  columns: (50%, 50%),
+  inset: (bottom: 25pt),
+  row-gutter: 25pt,
+  align: center + horizon,
+  [```
+    #import "@preview/patatrac:0.5.0"
+    #patatrac.cetz.canvas({
+      import patatrac: *
+      let draw = cetz.standard()
+      let floor = incline(100, 20deg)
+      let A = rect(15, 15)
+      let B = rect(15, 15)
+      A = stick(A("bl"), floor("tl"))
+      B = stick(B("br"), floor("tr"))
+      A = slide(A("c"), +20, 0)
+      B = slide(B("c"), -20, 0)
+      let k = spring(A("r"), B("l"))
+      draw(floor, A, B, k)
+    })
+  ```],
+  [
+    #scale(160%, {
+      set text(size: 15pt)
+      patatrac.cetz.canvas(length: 0.5mm, {
+        import patatrac: *
+        let draw = cetz.standard()
+        let floor = incline(100, 20deg)
+        let A = rect(15, 15)
+        let B = rect(15, 15)
+        A = stick(A("bl"), floor("tl"))
+        B = stick(B("br"), floor("tr"))
+        A = slide(A("c"), +20, 0)
+        B = slide(B("c"), -20, 0)
+        let k = spring(A("r"), B("l"))
+        draw(floor, A, B, k)
+      })
+    })
+  ]
+)
+
+#v(1fr)
+#pagebreak()
+
+#v(1fr)
+#{
+  show link: underline
+  show link: set text(fill: blue)
+  align(center, link("https://github.com/ZaninDavide/patatrac/blob/main/gallery/incline.typ"))
+}
+#v(1cm)
+#align(center, scale(160%, reflow: true, {
+  set text(size: 15pt)
+  patatrac.cetz.canvas(length: 0.5mm, {
+    import patatrac: *
+    let draw = cetz.standard(
+      rect: (stroke: 0.75pt, fill: white),
+      circle: (stroke: 0.75pt),
+      arrow: (stroke: 0.75pt, mark: (end: "stealth", fill: black)),
+      incline: (stroke: 0.75pt),
+      rope: (stroke: 0.75pt),
+    )
+
+    let sideA = 20
+    let sideB = 15
+    let radiusC = 5
+    let hang = 15
+
+    let I = incline(150, 25deg)
+
+    let A = rect(sideA,sideA)
+    A = stick(A("bl"), I("tl"))
+    A = slide(A, -40, 0)
+
+    let centerC = anchors.slide(I("tr")(), hang, sideA/2 - radiusC)
+    let C = place(circle(radiusC), centerC)
+    let L = rope(C(), I("tr"))
+    
+    let B = move(place(rect(sideB, sideB), C("r")), 0, -40)
+    let R = rope(A("r"), C("t"), B("t"))
+    
+    let tension1 = arrow(A("r"), 20)
+    let tension2 = arrow(B("t"), 20)
+
+    let dotted = tiling(
+      size: (2pt, 2pt), 
+      pad(std.circle(radius: 0.1pt, fill: black, stroke: none), 1pt)
+    )
+
+    draw(I, fill: dotted)
+    draw(L, C, R, tension1, tension2)
+    draw(point(tension1("end"), rot: false), lx: -8, ly: 2, label: $std.math.arrow(T)_1$, align: bottom)
+    draw(point(tension2("c"), rot: false), lx: 10, label: $std.math.arrow(T)_2$, align: bottom)
+    draw(point(C("c")), radius: 1pt)
+    
+    draw(axes(A("c"), 0, 40), stroke: (paint: black, thickness: 0.5pt, dash: "dashed")) 
+    draw(A, B)
+    draw(point(A("c")), label: $M$)
+    draw(point(B("c")), label: $m$, ly: 1)
+    
+    let coord(a) = { let a = anchors.to-anchor(a); return (a.x, a.y) }
+    cetz.angle.angle(label: $alpha$, radius: 30, label-radius: 38, stroke: 0.5pt, 
+      coord(I("bl")), 
+      coord(I("br")), 
+      coord(I("tr")), 
+    )
+  })
+}))
+#v(1fr)
+
+#pagebreak()
+#v(10pt)
+#align(center, text(size: 25pt)[`#import "@preview/beam:0.1.1"`])
+#v(10pt)
+
+#v(1fr)
+#grid(
+  columns: (50%, 50%),
+  inset: (bottom: 25pt),
+  row-gutter: 25pt,
+  align: center + horizon,
+  [```
+    #import "@preview/beam:0.1.1"
+    #beam.setup({
+      import beam: *
+      laser("laser", (0, 0))
+      lens("l1", (3, 0))
+      detector("cam", (4, 0))
+      beam("", "laser", "l1")
+      focus("", "l1", "cam")
+    })
+  ```],
+  [
+    #import "@preview/beam:0.1.1"
+    #beam.setup({
+      import beam: *
+      laser("laser", (0, 0))
+      lens("l1", (3, 0))
+      detector("cam", (4, 0))
+      beam("", "laser", "l1")
+      focus("", "l1", "cam")
+    })
+  ]
+)
+
+#v(1fr)
+
+#pagebreak()
+#v(10pt)
+#align(center, text(size: 25pt)[`#import "@preview/wicked:0.2.0": wick`])
+#v(10pt)
+#import "@preview/wicked:0.2.0": wick
 
 ```
 $ :
@@ -1137,23 +1294,25 @@ wick(id: #1, Psi)_rho (y)
 [
   ```  
   This is a 
-  #box(fill: red, radius: 10pt, inset: 10pt, baseline: 10pt,
+  #box(
+    fill: red, radius: 10pt, 
+    inset: (x: 10pt), outset: (y: 10pt),
     text(fill: white)[`BOX`]
   )
 
   This is a 
-  #block(fill: blue, radius: 10pt, inset: 10pt, baseline: 10pt,
+  #block(fill: blue, radius: 10pt, outset: 10pt,
     text(fill: white)[`BLOCK`]
   )
   ```
 ], 
 [ This is a 
-  #box(fill: red, radius: 10pt, inset: 10pt, baseline: 10pt,
+  #box(fill: red, radius: 10pt, inset: (x: 10pt), outset: (y: 10pt),
     text(fill: white)[`BOX`]
   )
 
   This is a 
-  #block(fill: blue, radius: 10pt, inset: 10pt,
+  #block(fill: blue, radius: 10pt, outset: 10pt,
     text(fill: white)[`BLOCK`]
   )
 ]
@@ -1187,17 +1346,17 @@ $ func(1,2,3; 4,5,6) $
   align: (left, left),
 [
   ```  
-  #metadata("Useful information")
+  Metadata is invisible content: #metadata("Useful information")
 
-  #context {
+  That we can query: #context {
     query(metadata).last().value
   }
   ```
 ], 
 [
-  #metadata("Useful information")
+  Metadata is invisible content: #metadata("Useful information")
 
-  #context {
+  That we can query: #context {
     query(metadata).last().value
   }
 ]
@@ -1233,14 +1392,14 @@ $ func(1,2,3; 4,5,6) $
 #pagebreak()
 #title[Find this presentation]
 
-#import "@preview/tiaoma:0.3.0"
+#import "@preview/tiaoma:0.3.0": barcode
 #show: align.with(center)
 
 ```
-#import "@preview/tiaoma:0.3.0"
-#tiaoma.barcode("https://github.com/ZaninDavide/typst-intro", "QRCode")
+#import "@preview/tiaoma:0.3.0": barcode
+#barcode("https://github.com/ZaninDavide/typst-intro", "QRCode")
 ```
-#tiaoma.barcode("https://github.com/ZaninDavide/typst-intro", "QRCode", options: (scale: 3.0))
+#barcode("https://github.com/ZaninDavide/typst-intro", "QRCode", options: (scale: 3.0))
  
 #text(fill: blue, underline(link("https://github.com/ZaninDavide/typst-intro")))
 
