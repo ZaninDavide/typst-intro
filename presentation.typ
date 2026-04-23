@@ -1370,7 +1370,7 @@ wick(id: #1, Psi)_rho (y)
 
 #title-page(image("images/stranger-things.png", width: 40%))
 
-#title[`box`es]
+#sub-title[`box`es]
 #grid(
   columns: (65%, 35%),
   inset: (bottom: 25pt),
@@ -1406,7 +1406,7 @@ wick(id: #1, Psi)_rho (y)
 
 #pagebreak()
 
-#title[2D input in math mode]
+#sub-title[2D input in math mode]
 #grid(
   columns: (55%, 45%),
   inset: (bottom: 25pt),
@@ -1423,7 +1423,7 @@ $ func(1,2,3; 4,5,6) $
 )
 #pagebreak()
 
-#title[`metadata`]
+#sub-title[`metadata`]
 #grid(
   columns: (55%, 45%),
   inset: (bottom: 25pt),
@@ -1450,7 +1450,7 @@ $ func(1,2,3; 4,5,6) $
 
 #pagebreak()
 
-#title[`WASM` plugins]
+#sub-title[`WASM` plugins]
 #grid(
   columns: (55%, 45%),
   inset: (bottom: 25pt),
@@ -1461,19 +1461,31 @@ $ func(1,2,3; 4,5,6) $
   ```  
   #let square(n) = {
     import plugin("example.wasm"): square
-    int.from-bytes(square(bytes((n,))))
+    int.from-bytes(square(n.to-bytes()))
   }
-  #square(5)
+  #square(15)
   ```
 ], 
 [
   #let square(n) = {
     import plugin("example.wasm"): square
-    int.from-bytes(square(bytes((n,))))
+    int.from-bytes(square(n.to-bytes()))
   }
-  #square(5)
+  #square(15)
 ]
 )
+
+#place(bottom + left, dy: -1cm, [
+  ```rust
+  use wasm_minimal_protocol::*;
+  initiate_protocol!();
+  #[wasm_func]
+  pub fn square(bytes: &[u8]) -> Vec<u8> {
+    // bytes conversion and squaring
+  }
+  ```
+])
+#place(bottom + left, dy: -1cm, box(fill: white.transparentize(30%), width: 17cm, height: 5cm, outset: 5pt))
 
 #pagebreak()
 #title[Find this presentation]
