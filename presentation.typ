@@ -708,18 +708,21 @@ $ F = m a $
 #pagebreak()
 #title[Compilation]
 
+#v(5mm)
 #align(center, [
-  *Locally*
+  #set text(30pt)
+  #set list(marker: sym.circle)
 
-  ```sh typst compile example.typ```
+  #grid(columns: (auto, auto), 
+    align: (center + horizon, left), 
+    inset: 20pt,
+    grid.cell(text(fill: luma(70%), smallcaps[locally]), rowspan: 2),
+    [- ```sh typst compile example.typ```],
+    [- ```sh typst watch example.typ```],
+    grid.cell(text(fill: luma(70%), smallcaps[online])),
+    list(underline(link("https://typst.app/",text(fill: blue, "https://typst.app/"))))
+  )
 
-  ```sh typst watch example.typ```
-
-  #v(20pt)
-
-  *Online*
-
-  #underline(link("https://typst.app/",text(fill: blue, "https://typst.app/")))
 ])
 
 #set page(columns: 2)
