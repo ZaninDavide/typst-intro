@@ -2,7 +2,7 @@
 
 #let main-color = rgb("#00afc6")
 #let main-color-variant = rgb("#00c6b5")
-#let main-gradient = gradient.linear(angle: 30deg, main-color, main-color-variant)
+#let main-gradient = gradient.linear(angle: 30deg, main-color-variant, main-color)
 
 #{
   set page(fill: main-gradient, margin: 1.5cm)
@@ -35,7 +35,7 @@
   scope: "parent", 
   pad(bottom: 10pt,
   box(inset: 20pt, radius: 4pt, width: 100%,
-    text(size: 30pt, weight: "bold", fill: main-gradient, it)
+    text(size: 30pt, weight: "bold", fill: main-color, it)
   ))
 )
 
@@ -159,12 +159,19 @@ console.log("Hello, world!")
 
 #{
   set page(columns: 2)
+  place(center + horizon, dx: 50%, text(fill: luma(90%), size: 430pt)[&])
+  align(center, box({
+    set text(size: 50pt, fill: main-gradient)
+    v(1fr)
+    par(leading: 20pt)[a *markup*\ _language_]
+    v(1fr)
+  }))
   colbreak()
   align(center, box({
-  set text(size: 50pt, fill: main-gradient)
-  v(1fr)
-  par(leading: 20pt)[Typst is a\ *markup*\ _language_]
-  v(1fr)
+    set text(size: 50pt, fill: main-gradient)
+    v(1fr)
+    par(leading: 20pt)[a *programming*\ _language_]
+    v(1fr)
   }))
 }
 
@@ -709,24 +716,24 @@ $ F = m a $
 #title[Compilation]
 
 #v(5mm)
-#align(center, [
+#align(center, block[
+  #show: align.with(left)
   #set text(30pt)
-  #set list(marker: sym.circle)
+  #set list(marker: text(fill: main-color, sym.circle), spacing: 1.5cm)
 
-  #grid(columns: (auto, auto), 
-    align: (center + horizon, left), 
-    inset: 20pt,
-    grid.cell(text(fill: luma(70%), smallcaps[locally]), rowspan: 2),
-    [- ```sh typst compile example.typ```],
-    [- ```sh typst watch example.typ```],
-    grid.cell(text(fill: luma(70%), smallcaps[online])),
-    list(underline(link("https://typst.app/",text(fill: blue, "https://typst.app/"))))
-  )
+
+  - ```sh typst compile example.typ```
+  - ```sh typst watch example.typ```
+  - #underline(link("https://typst.app/",text(fill: blue, "https://typst.app/")))
 
 ])
 
-#set page(columns: 2)
-#title-page[#box(text(size: 80pt)[🗃], baseline: 10pt) Packages]
+#set page(columns: 1)
+#title-page({
+  place(text(size: 500pt, fill: white.transparentize(80%))[🪐], center + horizon)
+  h(-1.5cm)
+  text(size: 80pt, font: "DejaVu Sans Mono")[Universe]
+})
 #set page(columns: 1)
 
 
