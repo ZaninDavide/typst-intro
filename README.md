@@ -2,7 +2,7 @@
   <img src="images/title-screen.png" alt="Title Screen" width="100%">
 </p>
 
-Slides for an introductory presentation of [Typst](https://typst.app/).
+[Slides](https://github.com/ZaninDavide/typst-intro/blob/main/presentation.pdf) for an introductory presentation of [Typst](https://typst.app/).
 
 ## Slides content summary
 
