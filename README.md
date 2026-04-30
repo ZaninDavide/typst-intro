@@ -32,9 +32,9 @@
 1. The most basic show rules work as function composition.
 1. The simplest show rule: underlining links. Combining show rules and lambda functions.
 1. Show-set rules are just syntactic sugar. The .with patter: align equations to the left.
-1. How to import and use templates.
+1. How to import and use templates. Everthing show rules.
 1. Example
-1. Compilation. You can compile locally using the CLI or use the online webapp.
+1. Compilation. You can compile locally using the CLI or use the online webapp. Live demo to see real time compilation in action.
 
 Slides 30 to 44 present useful packages for physicists.
 
