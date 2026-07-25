@@ -15,7 +15,7 @@
 1. How to make titles. How to make bullet lists.
 1. Numbered lists. Code snippets and code blocks.
 1. Comments.
-1. Enter math mode using $. Inline math. Block level math. Single letters are verbatim, multi-letter words have their own meaning. Inline math, grouping, greek letters and symbols. Fractions.
+1. Enter math mode using $. Inline math. Block level math. Single letters are verbatim, multi-letter words have their own meaning. Grouping, greek letters and symbols. Fractions.
 1. More symbols. Quotes to input upright text. Accents.
 1. Column vectors and matrices. Aligning equations: you are defining a grid where every odd column is right aligned and every even column is left aligned.
 1. Enter code mode using #. Calling functions. Strings. 
