@@ -141,14 +141,14 @@ $
 #sub-title[Markup mode]
 #side-by-side(
   [
-  ```
-  Odi et amo. 
-  Quare id faciam fortasse requiris.\ 
-  Nescio, 
-  sed fieri sentior et excrucior.
+    ```
+    Odi et amo. 
+    Quare id faciam fortasse requiris.\ 
+    Nescio, 
+    sed fieri sentior et excrucior.
 
-  Catullus
-  ```
+    Catullus
+    ```
   ],
   [
   Odi et amo. 
@@ -157,17 +157,19 @@ $
 
   Catullus
   ],
-  [```
-  We can make our text *bold* or _italic_.
-  ```],
+  [
+    ```
+    We can make our text *bold* or _italic_.
+    ```
+  ],
   [We can make our text *bold* or _italic_.],
   [
-  ```
-  = Big title
-  == Small title
-  === Smaller title
-  ==== Even smaller title
-  ```
+    ```
+    = Big title
+    == Small title
+    === Smaller title
+    ==== Even smaller title
+    ```
   ],
   [
   = Big title
@@ -227,60 +229,79 @@ print(\"Hello\")
 #pagebreak()
 #sub-title[Math mode]
 #side-by-side(
-  [```
-  The most beautiful equation in math is considered by many to be 
-  $e^(i pi) = -1$.
-  ```],
+  [
+    ```
+    The most beautiful equation in math is considered by many to be 
+    $e^(i pi) = -1$.
+    ```
+  ],
   [The most beautiful equation in math is considered by many to be $e^(i pi) = -1$.],
-  [```
-  A more general formula exists: 
-  $ 
-  e^(i theta) 
-  = sum_(n=0)^(+oo) (i theta)^n/(n!) 
-  = cos(theta) + i sin(theta). 
-  $
-  ```],
+  [
+    ```
+    A more general formula exists: 
+    $ 
+    e^(i theta) 
+    = sum_(n=0)^(+oo) (i theta)^n/(n!) 
+    = cos(theta) + i sin(theta). 
+    $
+    ```
+  ],
   [
   A more general formula exists: 
   $ 
   e^(i theta) = sum_(n=0)^(+oo) (i theta)^n/(n!) = cos(theta) + i sin(theta). 
   $
   ],
-  [```
-  $
-  A inter B = emptyset => 
-  A without B = A
-  $
-  ```],
+  [
+    ```
+    $
+    A inter B = emptyset => 
+    A without B = A
+    $
+    ```
+  ],
   [$ A inter B = emptyset => 
   A without B = A $],
-  [```$ 
-  Q = 2 pi
-  "energy at the start" / 
-  "energy dissipated"
-  $```],
+  [
+    ```
+    $ 
+    Q = 2 pi
+    "energy at the start" / 
+    "energy dissipated"
+    $
+    ```
+  ],
   [$ Q = 2 pi 
   "energy at the start" / 
   "energy dissipated" $],
-  [```
-  $ arrow(F) = m arrow(a) $```],
+  [
+    ```
+    $ arrow(F) = m arrow(a) $
+    ```
+  ],
   [$
   arrow(F) = m arrow(a)
   $],
-  [```$
-  vec(3,9,15) = 
-  mat(1,2,3; 4,5,6; 7,8,9) 
-  vec(1,1,0)   
-  $```],
+  [
+    ```
+    $
+    vec(3,9,15) = 
+    mat(1,2,3; 4,5,6; 7,8,9) 
+    vec(1,1,0)   
+    $
+    ```
+  ],
   [$
     vec(3,9,15) = mat(1,2,3; 4,5,6; 7,8,9) vec(1,1,0)   
   $],
-  [```
-  $
-  f(x) &= (x+1)^2 &&= x^2 + 2x + 1 \
-  g(x) &= 10(x-1) &&= 10x - 10 \
-  $
-  ```],
+  [
+    ```
+    $
+    f(x) &= (x+1)^2 &&= x^2 + 2x + 1 \
+    g(x) &= 10(x-1) &&= 10x - 10 \
+    $
+    ```
+  ],
   [
   $
   f(x) &= (x+1)^2 &&= x^2 + 2x + 1 \
@@ -294,54 +315,68 @@ print(\"Hello\")
 #sub-title[Code mode]
 
 #side-by-side(
-  [```
-  #bibliography("example.bib")
-  ```],
+  [
+    ```
+    #bibliography("example.bib")
+    ```
+  ],
   [
   #bibliography("example.bib", full: true)
   ],
-  [```
-  #strong("bold"), *bold*
-  ```],
+  [
+    ```
+    #strong("bold"), *bold*
+    ```
+  ],
   [
   #strong("bold"), *bold*
   ],
-  [```
-  #link("example.com", "Example")
-  ```],
+  [
+    ```
+    #link("example.com", "Example")
+    ```
+  ],
   [
   #link("example.com", "Example")
   ],
-  [```
-  #let x = "hello"
-  I want to say you #x
-  ```],
+  [
+    ```
+    #let x = "hello"
+    I want to say you #x
+    ```
+  ],
   [
   #let x = "hello"
   I want to say you #x
   ],
-  [```
-  #let x = [Typst is _amazing_]
-  #let y = "Typst is _amazing_"
-  #x \ #y
-  ```],
+  [
+    ```
+    #let x = [Typst is _amazing_]
+    #let y = "Typst is _amazing_"
+    #x \ #y
+    ```
+  ],
   [
   #let x = [Typst is _amazing_]
   #let y = "Typst is _amazing_"
   #x \ #y
   ],
-  [```
-  #let nice(it) = [✨] + it + [✨]
-  #nice([Typst]) \ #nice[Typst]
-  ```],
+  [
+    ```
+    #let nice(it) = [✨] + it + [✨]
+    #nice([Typst]) \ #nice[Typst]
+    ```
+  ],
   [
   #let nice(it) = [✨] + it + [✨]
   #nice([Typst]) \ #nice[Typst]
   ],
-  [```
-  #link("example.com",[_Example_])
-  #link("example.com")[_Example_]
-  ```],
+  [
+    ```
+    #link("example.com",[_Example_])
+    #link("example.com")[_Example_]
+    ```
+  ],
   [
   #link("example.com",[_Example_])
   #link("example.com")[_Example_]
@@ -360,18 +395,20 @@ print(\"Hello\")
       caption: [Cowdynamics],
     )
   ],
-  [```
-  #{
-    let N = 10
-    let n = 1
-    [1 ]
-    for i in range(2, N + 1) { 
-      n += i
-      [\+ #i ]
+  [
+    ```
+    #{
+      let N = 10
+      let n = 1
+      [1 ]
+      for i in range(2, N + 1) { 
+        n += i
+        [\+ #i ]
+      }
+      [\= #n]
     }
-    [\= #n]
-  }
-  ```],
+    ```
+  ],
   [
   #{
     let N = 10
@@ -384,14 +421,16 @@ print(\"Hello\")
     [\= #n]
   }
   ],
-  [```
-  #{
-    let bool = true
-    let list = (1, 2, 3)
-    let dict = (a: 1, b: 2)
-    let lambda = x => x * 2
-  }
-  ```],
+  [
+    ```
+    #{
+      let bool = true
+      let list = (1, 2, 3)
+      let dict = (a: 1, b: 2)
+      let lambda = x => x * 2
+    }
+    ```
+  ],
   []
 )
 
@@ -412,25 +451,29 @@ $)
 #pagebreak()
 
 #side-by-side(
-  [```
-  #set text(
-    font: "New Computer Modern"
-  )
-  Hello Typst enthusiasts!
-  ```],
+  [
+    ```
+    #set text(
+      font: "New Computer Modern"
+    )
+    Hello Typst enthusiasts!
+    ```
+  ],
   [
   #set text(font: "New Computer Modern")
   Hello Typst enthusiasts!
   ],
-  [```
-  #set heading(numbering: "1.i")
+  [
+    ```
+    #set heading(numbering: "1.i")
 
-  = A primary heading
-  The first block of text after the title
+    = A primary heading
+    The first block of text after the title
 
-  == A secondary heading
-  The paragraph right after the secondary heading
-  ```],
+    == A secondary heading
+    The paragraph right after the secondary heading
+    ```
+  ],
   [
   #set heading(numbering: "1.i")
 
@@ -440,26 +483,30 @@ $)
   == A secondary heading
   The paragraph right after the secondary heading
   ],
-  [```
-  #set heading(numbering: "1")
+  [
+    ```
+    #set heading(numbering: "1")
 
-  = Referenceable <ref>
-  This is @ref
-  ```],
+    = Referenceable <ref>
+    This is @ref
+    ```
+  ],
   [
     #set heading(numbering: "1")
 
     = Referenceable <ref>
     This is @ref
   ],
-  [```
-  #set list(marker: "👉", indent: 1cm)
+  [
+    ```
+    #set list(marker: "👉", indent: 1cm)
 
-  - Element A 
-    - Element A1
-    - Element A2
-  - Element B 
-  ```],
+    - Element A 
+      - Element A1
+      - Element A2
+    - Element B 
+    ```
+  ],
   [
   #set list(marker: "👉", indent: 1cm)
 
@@ -468,22 +515,26 @@ $)
     - Element A2
   - Element B 
   ],
-  [```
-  #set page(margin: (
-    top: 2cm, 
-    bottom: 3cm, 
-    left: 3cm,
-    right: 3cm,
-  ))
-  ```],
+  [
+    ```
+    #set page(margin: (
+      top: 2cm, 
+      bottom: 3cm, 
+      left: 3cm,
+      right: 3cm,
+    ))
+    ```
+  ],
   [],
-  [```
-  #{
-    set text(fill: red)
-    [Alert!]
-  }
-  Typst is coming!
-  ```],
+  [
+    ```
+    #{
+      set text(fill: red)
+      [Alert!]
+    }
+    Typst is coming!
+    ```
+  ],
   [
   #{
     set text(fill: red)
@@ -524,26 +575,30 @@ $)
 
 #side-by-side(
   columns: (55%, 45%),
-  [```
-  #show link: underline
-  #link("example.com", "Example")
-  ```],
+  [
+    ```
+    #show link: underline
+    #link("example.com", "Example")
+    ```
+  ],
   [
   #show link: underline
   #link("example.com", "Example")
   ],
-  [```
-  #show heading: it => {
-    set text(
-      size: 30pt, 
-      font: "Helvetica"
-    )
-    it
-  }
+  [
+    ```
+    #show heading: it => {
+      set text(
+        size: 30pt, 
+        font: "Helvetica"
+      )
+      it
+    }
 
-  = Lorem ipsum
-  #lorem(30)
-  ```],
+    = Lorem ipsum
+    #lorem(30)
+    ```
+  ],
   [
   #show heading: it => {
     set text(
@@ -556,15 +611,17 @@ $)
   = Lorem ipsum
   #lorem(30)
   ],
-  [```
-  #show heading: set text(
-    size: 30pt, 
-    font: "Helvetica"
-  )
+  [
+    ```
+    #show heading: set text(
+      size: 30pt, 
+      font: "Helvetica"
+    )
 
-  = Lorem ipsum
-  #lorem(30)
-  ```],
+    = Lorem ipsum
+    #lorem(30)
+    ```
+  ],
   [
   #show heading: it => {
     set text(
@@ -577,10 +634,12 @@ $)
   = Lorem ipsum
   #lorem(30)
   ],
-  [```
-  #show math.equation: align.with(left)
-  $ F = m a $
-  ```],
+  [
+    ```
+    #show math.equation: align.with(left)
+    $ F = m a $
+    ```
+  ],
   [
   #show math.equation: align.with(left)
   $ F = m a $
@@ -633,24 +692,26 @@ $)
 #package-header[`#import "@preview/physica:0.9.8": *`]
 
 #side-by-side(
-  [```
-  $
-  curl (grad V + pdv(vb(A), t)) = 
-  pdv(vb(B), t)
-  $
-  ```
+  [
+    ```
+    $
+    curl (grad V + pdv(vb(A), t)) = 
+    pdv(vb(B), t)
+    $
+    ```
   ],
   [
   $ curl (grad V + pdv(vb(A), t)) = pdv(vb(B), t) $
   ],
-  [```
-  #let tn = tensor
-  $ 
-  tn(R, +mu, -nu) -
-  1/2 R tn(g, +mu, -nu) =
-  8 pi G tn(T, +mu, -nu) 
-  $
-  ```
+  [
+    ```
+    #let tn = tensor
+    $ 
+    tn(R, +mu, -nu) -
+    1/2 R tn(g, +mu, -nu) =
+    8 pi G tn(T, +mu, -nu) 
+    $
+    ```
   ],
   [
   #let tn = tensor
@@ -664,16 +725,18 @@ $)
 #import "@preview/quill:0.7.2": *
 #package-demo(
   columns: 100%,
-  [```
-  #import "@preview/quill:0.7.2": *
-  #import "@preview/physica:0.9.8": ket
+  [
+    ```
+    #import "@preview/quill:0.7.2": *
+    #import "@preview/physica:0.9.8": ket
 
-  #let super = $ (ket(00) + ket(11))/sqrt(2) $
-  #quantum-circuit(
-    lstick($ket(0)$), $H$, ctrl(1), rstick(super, n: 2), [\ ],
-    lstick($ket(0)$), 1, targ(), 1
-  )
-  ```],
+    #let super = $ (ket(00) + ket(11))/sqrt(2) $
+    #quantum-circuit(
+      lstick($ket(0)$), $H$, ctrl(1), rstick(super, n: 2), [\ ],
+      lstick($ket(0)$), 1, targ(), 1
+    )
+    ```
+  ],
   v(-40pt) +
   scale(200%, reflow: true)[
   #import "@preview/quill:0.7.2": *
@@ -709,16 +772,18 @@ $)
 
 #v(1fr)
 #package-demo(
-  [```
-  #import "@preview/cetz:0.4.2"
-  #cetz.canvas({
-    import cetz.draw: *
-    circle((0, 0))
-    line((0, 0), (2, 1))
-  })
-  ```],
   [
-      #import "@preview/cetz:0.4.2"
+    ```
+    #import "@preview/cetz:0.4.2"
+    #cetz.canvas({
+      import cetz.draw: *
+      circle((0, 0))
+      line((0, 0), (2, 1))
+    })
+    ```
+  ],
+  [
+  #import "@preview/cetz:0.4.2"
   #cetz.canvas({
     import cetz.draw: *
     circle((0, 0))
@@ -738,7 +803,8 @@ $)
 
 #v(1fr)
 #package-demo(
-  [```
+  [
+    ```
     #import "@preview/zap:0.5.0"
     #zap.circuit({
         import zap: *
@@ -746,7 +812,8 @@ $)
           label: $R$, i: $i$
         )
     })
-  ```],
+    ```
+  ],
   [
     #scale(160%, {
       import "@preview/zap:0.5.0"
@@ -764,7 +831,7 @@ $)
 #pagebreak()
 
 #v(1fr)
-#place(top + center, source-link("https://github.com/l0uisgrange/zap/blob/main/examples/example1.typ"))
+#place(top + center, source-link("https://codeberg.org/grangelouis/zap/src/branch/main/examples/example1.typ"))
 #place(center + horizon, scale(130%, reflow: true, {
   import "@preview/zap:0.5.0"
   zap.circuit({
@@ -862,7 +929,8 @@ $)
 #v(1fr)
 #import "@preview/patatrac:0.5.0"
 #package-demo(
-  [```
+  [
+    ```
     #import "@preview/patatrac:0.5.0"
     #patatrac.cetz.canvas({
       import patatrac: *
@@ -877,7 +945,8 @@ $)
       let k = spring(A("r"), B("l"))
       draw(floor, A, B, k)
     })
-  ```],
+    ```
+  ],
   [
     #scale(160%, {
       set text(size: 15pt)
@@ -968,7 +1037,8 @@ $)
 
 #v(1fr)
 #package-demo(
-  [```
+  [
+    ```
     #import "@preview/beam:0.1.1"
     #beam.setup({
       import beam: *
@@ -978,7 +1048,8 @@ $)
       beam("", "laser", "l1")
       focus("", "l1", "cam")
     })
-  ```],
+    ```
+  ],
   [
     #import "@preview/beam:0.1.1"
     #beam.setup({
@@ -1038,21 +1109,24 @@ wick(id: #1, Psi)_rho (y)
 
 #side-by-side(
   align: auto,
-  [```
-  #context { text.size },
-  #context { text.font }
-  ```], [
+  [
+    ```
+    #context { text.size },
+    #context { text.font }
+    ```
+  ], [
     #context { text.size },
     #context { text.font }
   ],
-  [```
-  Introduction is at:\
-  #context { 
-    locate(<intro>).position()
-  }
+  [
+    ```
+    Introduction is at:\
+    #context { 
+      locate(<intro>).position()
+    }
 
-  = Introduction <intro>
-  ```
+    = Introduction <intro>
+    ```
   ],
   [
     Introduction is at:\
@@ -1084,33 +1158,22 @@ wick(id: #1, Psi)_rho (y)
 
 #title-page(image("images/stranger-things.png", width: 40%))
 
-#sub-title[`box`es]
+#sub-title[`box` vs `block`]
 #side-by-side(
-  columns: (65%, 35%),
+  columns: (60%, 40%),
   [
-    ```  
-    This is a 
-    #box(
-      fill: red, radius: 10pt, 
-      inset: (x: 10pt), outset: (y: 10pt),
-      text(fill: white)[`BOX`]
-    )
+    ```
+    #let A = box(fill: yellow, inset: 10pt)[A]
+    #let B = block(fill: yellow, inset: 10pt)[B]
 
-    This is a 
-    #block(fill: blue, radius: 10pt, outset: 10pt,
-      text(fill: white)[`BLOCK`]
-    )
+    This #A stays inline because it's a box and this #B breaks to a new paragraph because it's a block   
     ```
   ], 
-  [ This is a 
-    #box(fill: red, radius: 10pt, inset: (x: 10pt), outset: (y: 10pt),
-      text(fill: white)[`BOX`]
-    )
+  [ 
+    #let A = box(fill: yellow, inset: 10pt)[A]
+    #let B = block(fill: yellow, inset: 10pt)[B]
 
-    This is a 
-    #block(fill: blue, radius: 10pt, outset: 10pt,
-      text(fill: white)[`BLOCK`]
-    )
+    This #A stays inline because it's a box and this #B breaks to a new paragraph because it's a block  
   ]
 )
 
@@ -1119,9 +1182,12 @@ wick(id: #1, Psi)_rho (y)
 #sub-title[2D input in math mode]
 #side-by-side(
   columns: (55%, 45%),
-  [```#let func(..args) = repr(args)
-  $ func(1,2,3; 4,5,6) $
-  ```],
+  [
+    ```
+    #let func(..args) = repr(args)
+    $ func(1,2,3; 4,5,6) $
+    ```
+  ],
   [
   #let func(..args) = repr(args)
   $ func(1,2,3; 4,5,6) $
@@ -1133,7 +1199,7 @@ wick(id: #1, Psi)_rho (y)
 #side-by-side(
   columns: (55%, 45%),
   [
-    ```  
+    ```
     Metadata is invisible content: #metadata("Useful information")
 
     That we can query: #context {
@@ -1156,12 +1222,12 @@ wick(id: #1, Psi)_rho (y)
 #side-by-side(
   columns: (55%, 45%),
   [
-    ```  
+    ```
     #let square(n) = {
       import plugin("example.wasm"): square
       int.from-bytes(square(n.to-bytes()))
     }
-    #square(15)
+    $15^2 = #square(15)$
     ```
   ], 
   [
@@ -1169,21 +1235,25 @@ wick(id: #1, Psi)_rho (y)
       import plugin("example.wasm"): square
       int.from-bytes(square(n.to-bytes()))
     }
-    #square(15)
+    $15^2 = #square(15)$
   ]
 )
 
-#place(bottom + left, dy: -1cm, [
-  ```rust
-  use wasm_minimal_protocol::*;
-  initiate_protocol!();
-  #[wasm_func]
-  pub fn square(bytes: &[u8]) -> Vec<u8> {
-    // bytes conversion and squaring
-  }
-  ```
-])
-#place(bottom + left, dy: -1cm, box(fill: white.transparentize(30%), width: 17cm, height: 5cm, outset: 5pt))
+#place(bottom + right, dy: 0cm, align(left, {
+  block(fill: luma(95%), inset: 10pt, radius: 5pt)[
+    ```rust
+    use wasm_minimal_protocol::*;
+    initiate_protocol!();
+    #[wasm_func]
+    pub fn square(bytes: &[u8]) -> Vec<u8> {
+      // bytes conversion and squaring
+    }
+    ```
+  ]
+  v(-0.8em)
+  text(fill: luma(80%))[Rust package]
+}))
+//#place(bottom + left, dy: -1cm, box(fill: white.transparentize(30%), width: 17cm, height: 5cm, outset: 5pt))
 
 #pagebreak()
 #title[Find this presentation]
