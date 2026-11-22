@@ -1,8 +1,81 @@
-#set page(paper: "presentation-16-9")
-
 #let main-color = rgb("#00afc6")
 #let main-color-variant = rgb("#00c6b5")
 #let main-gradient = gradient.linear(angle: 30deg, main-color-variant, main-color)
+
+#let heading-box(body, fill: none, text-fill: white) = place(
+  top,
+  float: true,
+  scope: "parent",
+  pad(bottom: 10pt, box(
+    fill: fill,
+    inset: 20pt,
+    radius: 4pt,
+    width: 100%,
+    text(size: 30pt, weight: "bold", fill: text-fill, body),
+  )),
+)
+
+#let title(it) = heading-box(it, fill: main-gradient)
+#let sub-title(it) = heading-box(it, text-fill: main-color)
+
+#let title-page(it) = {
+  set page(fill: main-gradient, numbering: none)
+  v(1fr)
+  align(center, text(size: 50pt, fill: white, it))
+  v(1fr)
+}
+
+#let statement(it) = align(center, box({
+  set text(size: 50pt, fill: main-gradient)
+  v(1fr)
+  par(leading: 20pt, it)
+  v(1fr)
+}))
+
+#let syntax-slide(body) = {
+  v(1fr)
+  align(center, box({
+    set text(size: 40pt)
+    body
+  }))
+  v(1fr)
+}
+
+#let file-badge(extension, outlined: false) = {
+  let style = if outlined { (stroke: 2pt + luma(90%)) } else { (fill: luma(90%)) }
+  move(dy: 0em, box(inset: 15pt, radius: 10pt, ..style, raw("*." + extension, lang: "txt")))
+}
+
+#let side-by-side(columns: (50%, 50%), align: (left, left), ..cells) = grid(
+  columns: columns,
+  inset: (bottom: 25pt),
+  row-gutter: 25pt,
+  column-gutter: 10pt,
+  align: align,
+  ..cells,
+)
+
+#let package-demo(columns: (50%, 50%), ..cells) = grid(
+  columns: columns,
+  inset: (bottom: 25pt),
+  row-gutter: 25pt,
+  align: center + horizon,
+  ..cells,
+)
+
+#let package-header(code) = {
+  v(10pt)
+  align(center, text(size: 25pt, code))
+  v(10pt)
+}
+
+#let source-link(url) = {
+  show link: underline
+  show link: set text(fill: blue)
+  link(url)
+}
+
+#set page(paper: "presentation-16-9")
 
 #{
   set page(fill: main-gradient, margin: 1.5cm)
@@ -17,65 +90,22 @@
 
 #pagebreak()
 
-#set page(margin: 1.5cm, numbering: "1", number-align: right)
-
-#let title(it) = place(
-  top, 
-  float: true, 
-  scope: "parent", 
-  pad(bottom: 10pt,
-  box(fill: main-gradient, inset: 20pt, radius: 4pt, width: 100%,
-    text(size: 30pt, weight: "bold", fill: white, it)
-  ))
-)
-
-#let sub-title(it) = place(
-  top, 
-  float: true, 
-  scope: "parent", 
-  pad(bottom: 10pt,
-  box(inset: 20pt, radius: 4pt, width: 100%,
-    text(size: 30pt, weight: "bold", fill: main-color, it)
-  ))
-)
-
+#set page(margin: 1.5cm, numbering: "1", number-align: right, columns: 2)
 #set text(size: 20pt)
-#set page(columns: 2)
 #set raw(lang: "typ")
 
-#let title-page(it) = {
-  set page(fill: main-gradient, numbering: none)
-  v(1fr)
-  align(center, text(size: 50pt, fill: white, it))
-  v(1fr)
-}
+#show raw.where(block: true, lang: "typ"): code => block(breakable: false, grid(
+  columns: (auto, auto),
+  column-gutter: 1em,
+  inset: (y: par.leading / 2, right: 4pt, left: -5pt),
+  stroke: (x, y) => if x == 0 { (right: 1pt + luma(80%)) },
+  align: (right, raw.align),
+  ..for line in code.lines {
+    (text(fill: luma(80%))[#line.number], line.body)
+  },
+))
 
-// #show raw.where(block: true, lang: "typ"): set par.line(numbering: "1")
-#show raw.where(block: true, lang: "typ"): code => {
-  block(breakable: false, grid(
-    columns: (auto, auto),
-    column-gutter: 1em,
-    inset: (bottom: par.leading / 2, top: par.leading / 2, right: 4pt, left: -5pt),
-    stroke: (x, y) => { if x == 0 { (right: 1pt + luma(80%)) } else { none }},
-    align: (right, raw.align),
-    ..for line in code.lines {
-      (
-        text(fill: luma(80%))[#line.number],
-        line.body,
-      )
-    },
-  ))
-}
-
-#{
-  set page(columns: 2)
-  align(center, box({
-  set text(size: 50pt, fill: main-gradient)
-  v(1fr)
-  par(leading: 20pt)[Typst is a\ *typesetting*\ _system_]
-  v(1fr)
-  }))
-}
+#statement[Typst is a\ *typesetting*\ _system_]
 
 #pagebreak()
 #set page(columns: 1)
@@ -83,96 +113,24 @@
 #set text(size: 30pt)
 #v(1fr)
 $
-  #move(dy: 0em, box(inset: 15pt, fill: luma(90%), radius: 10pt)[```txt *.typ```])
+  #file-badge("typ")
   stretch(->, size: #5cm)^#box(inset: (bottom: -5pt))[compiler]
   cases(
-    #move(dy: 0em, box(inset: 15pt, fill: luma(90%), radius: 10pt)[```txt *.pdf```]),
-    #move(dy: 0em, box(inset: 15pt, fill: luma(90%), radius: 10pt)[```txt *.png```]),
-    #move(dy: 0em, box(inset: 15pt, fill: luma(90%), radius: 10pt)[```txt *.svg```]),
-    #move(dy: 0em, box(inset: 15pt, stroke: 2pt + luma(90%), radius: 10pt)[```txt *.html```]),
+    #file-badge("pdf"),
+    #file-badge("png"),
+    #file-badge("svg"),
+    #file-badge("html", outlined: true),
   )
 $
 #v(1fr)
 ])
 
-/*
-#pagebreak()
-
-#let arrow-content = {
-  move(dx: 0pt, dy: 100pt, scale(x: 300%, y: 300%, box(width: 0pt, height: 0pt, curve(fill: gray.transparentize(80%),
-    curve.line((50pt, 0pt), relative: true),
-    curve.line((0pt, 30pt), relative: true),
-    curve.line((50pt, -50pt), relative: true),
-    curve.line((-50pt, -50pt), relative: true),
-    curve.line((0pt, 30pt), relative: true),
-    curve.line((-50pt, 0pt), relative: true),
-    curve.close(),
-  ))))
-}
-
-#page(background: arrow-content)[
-#raw("= A nice big title
-Just some text to display. 👋 
-
-$ F(🍎) = integral_(-oo)^🍎 f(x) dif x $
-
-=== A smaller title // invisible comment
-A list of things you like:
-- Typst 
-- $e^(i pi) = -1$
-
-Some js code:
-```js
-console.log(\"Hello, world!\")
-```
-
-#figure(caption: \"A nice table\", table(columns: 2, 
-  [A], [B],
-  [0], [1], 
-  [2], [3], 
-))", block: true)
-
-#colbreak()
-
-= A nice big title
-Just some text to display. 👋 
-
-$ F(🍎) = integral_(-oo)^🍎 f(x) dif x $
-
-=== A smaller title // invisible comment
-A list of things you like:
-- Typst 
-- $e^(i pi) = -1$
-
-Some js code:
-```js
-console.log("Hello, world!")
-```
-
-#figure(caption: "A nice table", table(columns: 2, 
-  [A], [B],
-  [0], [1], 
-  [2], [3], 
-))
-]
-*/
-
 #{
   set page(columns: 2)
   place(center + horizon, dx: 50%, text(fill: luma(90%), size: 430pt)[&])
-  align(center, box({
-    set text(size: 50pt, fill: main-gradient)
-    v(1fr)
-    par(leading: 20pt)[a *markup*\ _language_]
-    v(1fr)
-  }))
+  statement[a *markup*\ _language_]
   colbreak()
-  align(center, box({
-    set text(size: 50pt, fill: main-gradient)
-    v(1fr)
-    par(leading: 20pt)[a *programming*\ _language_]
-    v(1fr)
-  }))
+  statement[a *programming*\ _language_]
 }
 
 #title-page[#text(size: 150pt, [*3*]) modes:\ #box(inset: (top: -15pt))[#text(size: 30pt)[markup, _math_, `code`]]]
@@ -181,12 +139,7 @@ console.log("Hello, world!")
 #set page(columns: 1)
 
 #sub-title[Markup mode]
-#grid(
-  columns: (50%, 50%),
-  inset: (bottom: 25pt),
-  row-gutter: 25pt,
-  column-gutter: 10pt,
-  align: (left, left),
+#side-by-side(
   [
   ```
   Odi et amo. 
@@ -273,12 +226,7 @@ print(\"Hello\")
 
 #pagebreak()
 #sub-title[Math mode]
-#grid(
-  columns: (50%, 50%),
-  inset: (bottom: 25pt),
-  row-gutter: 25pt,
-  column-gutter: 10pt,
-  align: (left, left),
+#side-by-side(
   [```
   The most beautiful equation in math is considered by many to be 
   $e^(i pi) = -1$.
@@ -327,18 +275,6 @@ print(\"Hello\")
   [$
     vec(3,9,15) = mat(1,2,3; 4,5,6; 7,8,9) vec(1,1,0)   
   $],
-  /* [```$ 
-  W &= integral_gamma 
-  arrow(F) dot dif arrow(s) \ 
-  &= integral_(t_i)^(t_f) m arrow(v) 
-  dot (dif arrow(s)) / (dif t)
-  = 1/2 m ( v_f^2 - v_i^2 )
-  $```],
-  [$ 
-  W &= integral_gamma arrow(F) dot dif arrow(s) \ 
-    &= integral_(t_i)^(t_f) m dif arrow(v) dot ( dif arrow(s) ) / (dif t)
-    = 1/2 m ( v_f^2 - v_i^2 )
-  $] */
   [```
   $
   f(x) &= (x+1)^2 &&= x^2 + 2x + 1 \
@@ -357,12 +293,7 @@ print(\"Hello\")
 
 #sub-title[Code mode]
 
-#grid(
-  columns: (50%, 50%),
-  inset: (bottom: 25pt),
-  row-gutter: 25pt,
-  column-gutter: 10pt,
-  align: (left, left),
+#side-by-side(
   [```
   #bibliography("example.bib")
   ```],
@@ -464,18 +395,6 @@ print(\"Hello\")
   []
 )
 
-/*
-#{
-set figure.caption(position: top)
-show link: set text(fill: blue)
-show link: underline
-set page(numbering: none)
-
-figure(caption: [Markup mode (https://typst.app/docs/reference/syntax/#markup)], placement: top, image("images/markup-mode.png"))
-figure(caption: [Math mode (https://typst.app/docs/reference/syntax/#math)], placement: top, image("images/math-mode.png"))
-}
-*/
-
 #place.flush()
 
 #set page(columns: 2)
@@ -484,122 +403,105 @@ figure(caption: [Math mode (https://typst.app/docs/reference/syntax/#math)], pla
 #pagebreak()
 #set page(columns: 1)
 
-#v(1fr)
-#align(center, box({
-  set text(size: 40pt)
-  $ 
+#syntax-slide($ 
   #[`#set`]#h(15pt)
   overbrace(#text(fill: blue)[`text`], #box(width: 0pt, "element"))#h(-5pt)
   #[`(`]#h(0pt) underbrace(#[`size: 30pt`], "new defaults")#h(0pt) #[`)`] 
-  $
-}))
-#v(1fr)
+$)
 
 #pagebreak()
 
-#grid(
-  columns: (50%, 50%),
-  inset: (bottom: 25pt),
-  row-gutter: 25pt,
-  column-gutter: 10pt,
-  align: (left, left),
-[```
-#set text(
-  font: "New Computer Modern"
-)
-Hello Typst enthusiasts!
-```],
-[
-#set text(font: "New Computer Modern")
-Hello Typst enthusiasts!
-],
-[```
-#set heading(numbering: "1.i")
+#side-by-side(
+  [```
+  #set text(
+    font: "New Computer Modern"
+  )
+  Hello Typst enthusiasts!
+  ```],
+  [
+  #set text(font: "New Computer Modern")
+  Hello Typst enthusiasts!
+  ],
+  [```
+  #set heading(numbering: "1.i")
 
-= A primary heading
-The first block of text after the title
+  = A primary heading
+  The first block of text after the title
 
-== A secondary heading
-The paragraph right after the secondary heading
-```],
-[
-#set heading(numbering: "1.i")
+  == A secondary heading
+  The paragraph right after the secondary heading
+  ```],
+  [
+  #set heading(numbering: "1.i")
 
-= A primary heading
-The first block of text after the title
+  = A primary heading
+  The first block of text after the title
 
-== A secondary heading
-The paragraph right after the secondary heading
-],
-[```
-#set heading(numbering: "1")
-
-= Referenceable <ref>
-This is @ref
-```],
-[
+  == A secondary heading
+  The paragraph right after the secondary heading
+  ],
+  [```
   #set heading(numbering: "1")
 
   = Referenceable <ref>
   This is @ref
-],
-[```
-#set list(marker: "👉", indent: 1cm)
+  ```],
+  [
+    #set heading(numbering: "1")
 
-- Element A 
-  - Element A1
-  - Element A2
-- Element B 
-```],
-[
-#set list(marker: "👉", indent: 1cm)
+    = Referenceable <ref>
+    This is @ref
+  ],
+  [```
+  #set list(marker: "👉", indent: 1cm)
 
-- Element A 
-  - Element A1
-  - Element A2
-- Element B 
-],
-[```
-#set page(margin: (
-  top: 2cm, 
-  bottom: 3cm, 
-  left: 3cm,
-  right: 3cm,
-))
-```],
-[],
-[```
-#{
-  set text(fill: red)
-  [Alert!]
-}
-Typst is coming!
-```],
-[
-#{
-  set text(fill: red)
-  [Alert!]
-}
-Typst is coming!
-]
+  - Element A 
+    - Element A1
+    - Element A2
+  - Element B 
+  ```],
+  [
+  #set list(marker: "👉", indent: 1cm)
+
+  - Element A 
+    - Element A1
+    - Element A2
+  - Element B 
+  ],
+  [```
+  #set page(margin: (
+    top: 2cm, 
+    bottom: 3cm, 
+    left: 3cm,
+    right: 3cm,
+  ))
+  ```],
+  [],
+  [```
+  #{
+    set text(fill: red)
+    [Alert!]
+  }
+  Typst is coming!
+  ```],
+  [
+  #{
+    set text(fill: red)
+    [Alert!]
+  }
+  Typst is coming!
+  ]
 )
 
 #pagebreak()
-#v(1fr)
-#align(center, box({
-  set text(size: 40pt)
-  $ 
+#syntax-slide($ 
   #[`#show`]#h(15pt)
   overbrace(#text(fill: blue)[`link`], #box(width: 0pt, "filter"))#h(-5pt)
   #[`: `]#h(-15pt) underbrace(#text(fill: blue)[`underline`], "editing function")#h(0pt) 
-  $
-}))
-#v(1fr)
+$)
 
 #pagebreak()
-#v(1fr)
-#align(center, box({
-  set text(size: 40pt)
+#syntax-slide({
   $
     #[`#show`]#h(15pt)
     #text(fill: blue)[`link`]#h(-5pt)
@@ -616,80 +518,73 @@ Typst is coming!
   #text(fill: blue)[`link`]#h(0pt)
   )
   $
-}))
-#v(1fr)
-
+})
 
 #pagebreak()
 
-
-#grid(
+#side-by-side(
   columns: (55%, 45%),
-  inset: (bottom: 25pt),
-  row-gutter: 25pt,
-  column-gutter: 10pt,
-  align: (left, left),
-[```
-#show link: underline
-#link("example.com", "Example")
-```],
-[
-#show link: underline
-#link("example.com", "Example")
-],
-[```
-#show heading: it => {
-  set text(
+  [```
+  #show link: underline
+  #link("example.com", "Example")
+  ```],
+  [
+  #show link: underline
+  #link("example.com", "Example")
+  ],
+  [```
+  #show heading: it => {
+    set text(
+      size: 30pt, 
+      font: "Helvetica"
+    )
+    it
+  }
+
+  = Lorem ipsum
+  #lorem(30)
+  ```],
+  [
+  #show heading: it => {
+    set text(
+      size: 30pt, 
+      font: "Helvetica"
+    )
+    it
+  }
+
+  = Lorem ipsum
+  #lorem(30)
+  ],
+  [```
+  #show heading: set text(
     size: 30pt, 
     font: "Helvetica"
   )
-  it
-}
 
-= Lorem ipsum
-#lorem(30)
-```],
-[
-#show heading: it => {
-  set text(
-    size: 30pt, 
-    font: "Helvetica"
-  )
-  it
-}
+  = Lorem ipsum
+  #lorem(30)
+  ```],
+  [
+  #show heading: it => {
+    set text(
+      size: 30pt, 
+      font: "Helvetica"
+    )
+    it
+  }
 
-= Lorem ipsum
-#lorem(30)
-],
-[```
-#show heading: set text(
-  size: 30pt, 
-  font: "Helvetica"
-)
-
-= Lorem ipsum
-#lorem(30)
-```],
-[
-#show heading: it => {
-  set text(
-    size: 30pt, 
-    font: "Helvetica"
-  )
-  it
-}
-
-= Lorem ipsum
-#lorem(30)
-],
-[```
-#show math.equation: align.with(left)
-$ F = m a $
-```],
-[
-#show math.equation: align.with(left)
-$ F = m a $
-]
+  = Lorem ipsum
+  #lorem(30)
+  ],
+  [```
+  #show math.equation: align.with(left)
+  $ F = m a $
+  ```],
+  [
+  #show math.equation: align.with(left)
+  $ F = m a $
+  ]
 )
 
 #pagebreak()
@@ -721,100 +616,78 @@ $ F = m a $
   #set text(30pt)
   #set list(marker: text(fill: main-color, sym.circle), spacing: 1.5cm)
 
-
   - ```sh typst compile example.typ```
   - ```sh typst watch example.typ```
   - #underline(link("https://typst.app/",text(fill: blue, "https://typst.app/")))
 
 ])
 
-#set page(columns: 1)
 #title-page({
-  place(text(size: 500pt, fill: white.transparentize(80%))[🪐], center + horizon)
+  place(text(size: 300pt, fill: white.transparentize(80%), baseline: -1cm)[🪐], center + horizon)
   h(-1.5cm)
   text(size: 80pt, font: "DejaVu Sans Mono")[Universe]
 })
-#set page(columns: 1)
-
 
 #import "@preview/physica:0.9.8": *
 
-#v(10pt)
-#align(center, text(size: 25pt)[`#import "@preview/physica:0.9.8": *`])
-#v(10pt)
+#package-header[`#import "@preview/physica:0.9.8": *`]
 
-#grid(
-  columns: (50%, 50%),
-  inset: (bottom: 25pt),
-  row-gutter: 25pt,
-  column-gutter: 10pt,
-  align: (left, left),
-[```
-$
-curl (grad V + pdv(vb(A), t)) = 
-pdv(vb(B), t)
-$
-```
-],
-[
-$ curl (grad V + pdv(vb(A), t)) = pdv(vb(B), t) $
-],
-[```
-#let tn = tensor
-$ 
-tn(R, +mu, -nu) -
-1/2 R tn(g, +mu, -nu) =
-8 pi G tn(T, +mu, -nu) 
-$
-```
-],
-[
-#let tn = tensor
-$ tn(R, +mu, -nu) - 1/2 R tn(g, +mu, -nu) = 8 pi G tn(T, +mu, -nu) $
-]
-,
+#side-by-side(
+  [```
+  $
+  curl (grad V + pdv(vb(A), t)) = 
+  pdv(vb(B), t)
+  $
+  ```
+  ],
+  [
+  $ curl (grad V + pdv(vb(A), t)) = pdv(vb(B), t) $
+  ],
+  [```
+  #let tn = tensor
+  $ 
+  tn(R, +mu, -nu) -
+  1/2 R tn(g, +mu, -nu) =
+  8 pi G tn(T, +mu, -nu) 
+  $
+  ```
+  ],
+  [
+  #let tn = tensor
+  $ tn(R, +mu, -nu) - 1/2 R tn(g, +mu, -nu) = 8 pi G tn(T, +mu, -nu) $
+  ],
 )
 
 #pagebreak()
-#v(10pt)
-#align(center, text(size: 25pt)[`#import "@preview/quill:0.7.2": *`])
-#v(10pt)
+#package-header[`#import "@preview/quill:0.7.2": *`]
 
 #import "@preview/quill:0.7.2": *
-#grid(
+#package-demo(
   columns: 100%,
-  inset: (bottom: 25pt),
-  row-gutter: 25pt,
-  align: center + horizon,
-[```
-#import "@preview/quill:0.7.2": *
-#import "@preview/physica:0.9.8": ket
+  [```
+  #import "@preview/quill:0.7.2": *
+  #import "@preview/physica:0.9.8": ket
 
-#let super = $ (ket(00) + ket(11))/sqrt(2) $
-#quantum-circuit(
-  lstick($ket(0)$), $H$, ctrl(1), rstick(super, n: 2), [\ ],
-  lstick($ket(0)$), 1, targ(), 1
-)
-```]
-,
-v(-40pt) +
-scale(200%, reflow: true)[
-#import "@preview/quill:0.7.2": *
-#let super = $ (ket(00) + ket(11))/sqrt(2) $
-#quantum-circuit(
-  lstick($ket(0)$), $H$, ctrl(1), rstick(super, n: 2), [\ ],
-  lstick($ket(0)$), 1, targ(), 1
-)
-]
+  #let super = $ (ket(00) + ket(11))/sqrt(2) $
+  #quantum-circuit(
+    lstick($ket(0)$), $H$, ctrl(1), rstick(super, n: 2), [\ ],
+    lstick($ket(0)$), 1, targ(), 1
+  )
+  ```],
+  v(-40pt) +
+  scale(200%, reflow: true)[
+  #import "@preview/quill:0.7.2": *
+  #let super = $ (ket(00) + ket(11))/sqrt(2) $
+  #quantum-circuit(
+    lstick($ket(0)$), $H$, ctrl(1), rstick(super, n: 2), [\ ],
+    lstick($ket(0)$), 1, targ(), 1
+  )
+  ]
 )
 
 #pagebreak()
 #let group = gategroup.with(stroke: (dash: "dotted", thickness: .5pt))
-#{
-  show link: underline
-  show link: set text(fill: blue)
-  align(center, link("https://github.com/Mc-Zen/quill/blob/v0.6.1/examples/fault-tolerant-measurement.typ"))
-}
+#align(center, source-link("https://github.com/Mc-Zen/quill/blob/v0.6.1/examples/fault-tolerant-measurement.typ"))
 #place(center + horizon, scale(180%, reflow: true, quantum-circuit(
   row-spacing: 6pt,
   fill-wires: false,
@@ -831,18 +704,11 @@ scale(200%, reflow: true)[
   setwire(0), 5,  setwire(1), 3, $M'$, 1,
 )))
 
-
 #pagebreak()
-#v(10pt)
-#align(center, text(size: 25pt)[`#import "@preview/cetz:0.4.2"`])
-#v(10pt)
+#package-header[`#import "@preview/cetz:0.4.2"`]
 
 #v(1fr)
-#grid(
-  columns: (50%, 50%),
-  inset: (bottom: 25pt),
-  row-gutter: 25pt,
-  align: center + horizon,
+#package-demo(
   [```
   #import "@preview/cetz:0.4.2"
   #cetz.canvas({
@@ -868,16 +734,10 @@ scale(200%, reflow: true)[
 #figure(caption: [_La Mona Lisa_ according to chatGPT], image("images/mona-lisa.pdf", height: 11cm))
 #pagebreak()
 
-#v(10pt)
-#align(center, text(size: 25pt)[`#import "@preview/zap:0.5.0"`])
-#v(10pt)
+#package-header[`#import "@preview/zap:0.5.0"`]
 
 #v(1fr)
-#grid(
-  columns: (50%, 50%),
-  inset: (bottom: 25pt),
-  row-gutter: 25pt,
-  align: center + horizon,
+#package-demo(
   [```
     #import "@preview/zap:0.5.0"
     #zap.circuit({
@@ -904,11 +764,7 @@ scale(200%, reflow: true)[
 #pagebreak()
 
 #v(1fr)
-#{
-  show link: underline
-  show link: set text(fill: blue)
-  place(top + center, link("https://github.com/l0uisgrange/zap/blob/main/examples/example1.typ"))
-}
+#place(top + center, source-link("https://github.com/l0uisgrange/zap/blob/main/examples/example1.typ"))
 #place(center + horizon, scale(130%, reflow: true, {
   import "@preview/zap:0.5.0"
   zap.circuit({
@@ -940,9 +796,7 @@ scale(200%, reflow: true)[
 #v(1fr)
 
 #pagebreak()
-#v(10pt)
-#align(center, text(size: 25pt)[`#import "@preview/lilaq:0.6.0" as lq`])
-#v(10pt)
+#package-header[`#import "@preview/lilaq:0.6.0" as lq`]
 #import "@preview/lilaq:0.6.0" as lq
 
 ```
@@ -1003,17 +857,11 @@ scale(200%, reflow: true)[
 
 #pagebreak()
 
-#v(10pt)
-#align(center, text(size: 25pt)[`#import "@preview/patatrac:0.5.0"`])
-#v(10pt)
+#package-header[`#import "@preview/patatrac:0.5.0"`]
 
 #v(1fr)
 #import "@preview/patatrac:0.5.0"
-#grid(
-  columns: (50%, 50%),
-  inset: (bottom: 25pt),
-  row-gutter: 25pt,
-  align: center + horizon,
+#package-demo(
   [```
     #import "@preview/patatrac:0.5.0"
     #patatrac.cetz.canvas({
@@ -1054,11 +902,7 @@ scale(200%, reflow: true)[
 #pagebreak()
 
 #v(1fr)
-#{
-  show link: underline
-  show link: set text(fill: blue)
-  align(center, link("https://github.com/ZaninDavide/patatrac/blob/main/gallery/incline.typ"))
-}
+#align(center, source-link("https://github.com/ZaninDavide/patatrac/blob/main/gallery/incline.typ"))
 #v(1cm)
 #align(center, scale(160%, reflow: true, {
   set text(size: 15pt)
@@ -1120,16 +964,10 @@ scale(200%, reflow: true)[
 #v(1fr)
 
 #pagebreak()
-#v(10pt)
-#align(center, text(size: 25pt)[`#import "@preview/beam:0.1.1"`])
-#v(10pt)
+#package-header[`#import "@preview/beam:0.1.1"`]
 
 #v(1fr)
-#grid(
-  columns: (50%, 50%),
-  inset: (bottom: 25pt),
-  row-gutter: 25pt,
-  align: center + horizon,
+#package-demo(
   [```
     #import "@preview/beam:0.1.1"
     #beam.setup({
@@ -1157,9 +995,7 @@ scale(200%, reflow: true)[
 #v(1fr)
 
 #pagebreak()
-#v(10pt)
-#align(center, text(size: 25pt)[`#import "@preview/wicked:0.2.0": wick`])
-#v(10pt)
+#package-header[`#import "@preview/wicked:0.2.0": wick`]
 #import "@preview/wicked:0.2.0": wick
 
 ```
@@ -1200,11 +1036,8 @@ wick(id: #1, Psi)_rho (y)
 ]
 #set page(columns: 1)
 
-#grid(
-  columns: (50%, 50%),
-  inset: (bottom: 25pt),
-  row-gutter: 25pt,
-  column-gutter: 10pt,
+#side-by-side(
+  align: auto,
   [```
   #context { text.size },
   #context { text.font }
@@ -1252,108 +1085,92 @@ wick(id: #1, Psi)_rho (y)
 #title-page(image("images/stranger-things.png", width: 40%))
 
 #sub-title[`box`es]
-#grid(
+#side-by-side(
   columns: (65%, 35%),
-  inset: (bottom: 25pt),
-  row-gutter: 25pt,
-  column-gutter: 10pt,
-  align: (left, left),
-[
-  ```  
-  This is a 
-  #box(
-    fill: red, radius: 10pt, 
-    inset: (x: 10pt), outset: (y: 10pt),
-    text(fill: white)[`BOX`]
-  )
+  [
+    ```  
+    This is a 
+    #box(
+      fill: red, radius: 10pt, 
+      inset: (x: 10pt), outset: (y: 10pt),
+      text(fill: white)[`BOX`]
+    )
 
-  This is a 
-  #block(fill: blue, radius: 10pt, outset: 10pt,
-    text(fill: white)[`BLOCK`]
-  )
-  ```
-], 
-[ This is a 
-  #box(fill: red, radius: 10pt, inset: (x: 10pt), outset: (y: 10pt),
-    text(fill: white)[`BOX`]
-  )
+    This is a 
+    #block(fill: blue, radius: 10pt, outset: 10pt,
+      text(fill: white)[`BLOCK`]
+    )
+    ```
+  ], 
+  [ This is a 
+    #box(fill: red, radius: 10pt, inset: (x: 10pt), outset: (y: 10pt),
+      text(fill: white)[`BOX`]
+    )
 
-  This is a 
-  #block(fill: blue, radius: 10pt, outset: 10pt,
-    text(fill: white)[`BLOCK`]
-  )
-]
+    This is a 
+    #block(fill: blue, radius: 10pt, outset: 10pt,
+      text(fill: white)[`BLOCK`]
+    )
+  ]
 )
 
 #pagebreak()
 
 #sub-title[2D input in math mode]
-#grid(
+#side-by-side(
   columns: (55%, 45%),
-  inset: (bottom: 25pt),
-  row-gutter: 25pt,
-  column-gutter: 10pt,
-  align: (left, left),
-[```#let func(..args) = repr(args)
-$ func(1,2,3; 4,5,6) $
-```],
-[
-#let func(..args) = repr(args)
-$ func(1,2,3; 4,5,6) $
-]
+  [```#let func(..args) = repr(args)
+  $ func(1,2,3; 4,5,6) $
+  ```],
+  [
+  #let func(..args) = repr(args)
+  $ func(1,2,3; 4,5,6) $
+  ]
 )
 #pagebreak()
 
 #sub-title[`metadata`]
-#grid(
+#side-by-side(
   columns: (55%, 45%),
-  inset: (bottom: 25pt),
-  row-gutter: 25pt,
-  column-gutter: 10pt,
-  align: (left, left),
-[
-  ```  
-  Metadata is invisible content: #metadata("Useful information")
+  [
+    ```  
+    Metadata is invisible content: #metadata("Useful information")
 
-  That we can query: #context {
-    query(metadata).last().value
-  }
-  ```
-], 
-[
-  Metadata is invisible content: #metadata("Useful information")
+    That we can query: #context {
+      query(metadata).last().value
+    }
+    ```
+  ], 
+  [
+    Metadata is invisible content: #metadata("Useful information")
 
-  That we can query: #context {
-    query(metadata).last().value
-  }
-]
+    That we can query: #context {
+      query(metadata).last().value
+    }
+  ]
 )
 
 #pagebreak()
 
 #sub-title[`WASM` plugins]
-#grid(
+#side-by-side(
   columns: (55%, 45%),
-  inset: (bottom: 25pt),
-  row-gutter: 25pt,
-  column-gutter: 10pt,
-  align: (left, left),
-[
-  ```  
-  #let square(n) = {
-    import plugin("example.wasm"): square
-    int.from-bytes(square(n.to-bytes()))
-  }
-  #square(15)
-  ```
-], 
-[
-  #let square(n) = {
-    import plugin("example.wasm"): square
-    int.from-bytes(square(n.to-bytes()))
-  }
-  #square(15)
-]
+  [
+    ```  
+    #let square(n) = {
+      import plugin("example.wasm"): square
+      int.from-bytes(square(n.to-bytes()))
+    }
+    #square(15)
+    ```
+  ], 
+  [
+    #let square(n) = {
+      import plugin("example.wasm"): square
+      int.from-bytes(square(n.to-bytes()))
+    }
+    #square(15)
+  ]
 )
 
 #place(bottom + left, dy: -1cm, [
